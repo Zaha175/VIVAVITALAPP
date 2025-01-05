@@ -19,11 +19,12 @@
             background-attachment: fixed;
         }
 
+        /* Allgemeine Container-Stile */
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 1200px; /* Breite des Containers erhöht */
+            margin: 50px auto;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.85); /* Angepasste Transparenz */
+            background-color: rgba(255, 255, 255, 0.9);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
         }
@@ -33,11 +34,33 @@
             padding: 20px 0;
         }
 
-        h1 {
+        /* Haupttitel */
+        .main-title {
+            font-size: 2.2rem;
+            font-weight: bold;
             color: #d9a600;
             margin-bottom: 10px;
-            font-size: 2.5rem;
             text-transform: uppercase;
+        }
+
+        /* Formel */
+        .formula {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin: 15px 0;
+        }
+
+        /* Erklärung */
+        .formula-explanation {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #555;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f4f4f4;
+            border-left: 4px solid #d9a600;
+            border-radius: 4px;
         }
 
         nav ul {
@@ -59,6 +82,9 @@
             text-decoration: none;
             font-weight: bold;
             text-transform: uppercase;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         nav ul li a:hover {
@@ -66,8 +92,8 @@
         }
 
         nav ul li a.active {
-            color: #d9a600;
-            text-decoration: underline;
+            color: #fff;
+            background-color: #d9a600;
         }
 
         h2 {
@@ -149,6 +175,12 @@
         }
 
         /* Media Query für kleinere Bildschirme */
+        @media (max-width: 1200px) {
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+        }
         @media (max-width: 600px) {
             .container {
                 width: 95%;
@@ -191,7 +223,6 @@
                 margin-left: -60px;
             }
         }
-        
         .button-container {
             text-align: center;
             margin-top: 20px;
@@ -233,12 +264,12 @@
 <body>
     <header>
         <div class="container">
-            <h1 class="main-title">JUNGSINGULÄR – Brücke in die Zukunft</h1>
+             <h1 class="main-title">JUNGSINGULÄR – Brücke in die Zukunft</h1>
             <h2 class="formula">(S∧Sim)⇒(K∧A)</h2>
             <p class="formula-explanation">
                 Wenn Singularität und Simulation zusammentreffen, entfaltet sich der <strong>kritische Moment</strong> und der <strong>Aufstieg</strong> gleichzeitig – ein Ereignis, das die Zukunft <strong>unwiderruflich verändert</strong>.
             </p>
-            <nav>
+            <nav aria-label="Hauptnavigation">
                 <ul>
                     <li><a href="#ernaehrung">Ernährung & Supplemente</a></li>
                     <li><a href="#bewegung">Regelmäßige Bewegung</a></li>
@@ -355,12 +386,12 @@
         </div>
 
         <div class="iframe-container">
-            <iframe id="lifeAgeFrame" src="https://zaha175.github.io/LEBENSALTER-RECHNER/" title="Lebensalter-Rechner"></iframe>
+            <iframe loading="lazy" id="lifeAgeFrame" src="https://zaha175.github.io/LEBENSALTER-RECHNER/" title="Lebensalter-Rechner"></iframe>
         </div>
     </main>
 
     <footer>
-        <p>© 2024 JUNGSINGULÄR. Alle Rechte vorbehalten.</p>
+        <p>© 2024 VivaVital. Alle Rechte vorbehalten.</p>
         <nav>
             <a href="#ernaehrung">Ernährung</a> | 
             <a href="#bewegung">Bewegung</a> | 
@@ -369,7 +400,6 @@
         </nav>
     </footer>
     <script>
-        // Bestehender JavaScript-Code für die Navigation und andere Funktionen
         window.addEventListener('scroll', () => {
             let sections = document.querySelectorAll('section');
             let navLinks = document.querySelectorAll('nav ul li a');
@@ -384,7 +414,7 @@
                     navLinks.forEach(link => {
                         link.classList.remove('active');
                     });
-                    document.querySelector('nav ul li a[href*=' + id + ']').classList.add('active');
+                    document.querySelector(`nav ul li a[href*='${id}']`)?.classList.add('active');
                 }
             });
         });
