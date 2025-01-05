@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Aging-App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            background-image: url('https://cdn.gamma.app/fhpleqvbjim2f32/fd35589423a142ccabb83db821adfbf9/original/image.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85); /* Angepasste Transparenz */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        h1 {
+            color: #d9a600;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+            flex: 1 0 auto;
+        }
+
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        nav ul li a.active {
+            color: #d9a600;
+            text-decoration: underline;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            background-color: #f8f8f8;
+            border-left: 4px solid #d9a600;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+            color: #333;
+        }
+
+        footer nav {
+            margin-top: 10px;
+        }
+
+        footer nav a {
+            margin: 0 10px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Media Query für kleinere Bildschirme */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            p, ul li, a {
+                font-size: 0.9rem;
+            }
+
+            nav ul li {
+                margin: 5px;
+            }
+
+            .tooltip .tooltiptext {
+                width: 150px;
+                margin-left: -75px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            p, ul li, a {
+                font-size: 0.8rem;
+            }
+
+            .tooltip .tooltiptext {
+                width: 120px;
+                margin-left: -60px;
+            }
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .calculate-button {
+            padding: 15px 30px;
+            background-color: #d9a600;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .calculate-button:hover {
+            background-color: #b58100;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .calculate-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        #lifeAgeFrame {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>VivaVital – Bewusst gesund und jung bleiben</h1>
+            <nav>
+                <ul>
+                    <li><a href="#ernaehrung">Ernährung & Supplemente</a></li>
+                    <li><a href="#bewegung">Regelmäßige Bewegung</a></li>
+                    <li><a href="#medikamente">Medikamente & Interventionen</a></li>
+                    <li><a href="#lebensstil">Lebensstil & weitere Faktoren</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="ernaehrung">
+            <h2><i class="fas fa-apple-alt"></i> Ernährung & Supplemente</h2>
+            <p>Hier finden Sie Informationen und Tipps zu einer gesunden Ernährung, die reich an Antioxidantien ist und den Alterungsprozess verlangsamen kann.</p>
+            <ul>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Antioxidantien helfen, Zellschäden zu reduzieren.</span></span>
+                    Essen Sie viel <i class="fas fa-apple-alt"></i> Obst und <i class="fas fa-carrot"></i> Gemüse.
+                </li>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Nüsse und Samen sind reich an Vitamin E und anderen Antioxidantien.</span></span>
+                    Integrieren Sie <i class="fas fa-seedling"></i> Nüsse und Samen in Ihre Ernährung.
+                </li>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Vollkornprodukte enthalten mehr Ballaststoffe und Nährstoffe als Weißmehlprodukte.</span></span>
+                    Bevorzugen Sie <i class="fas fa-bread-slice"></i> Vollkornprodukte gegenüber Weißmehlprodukten.
+                </li>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Ausreichend Wasser zu trinken ist wichtig für die Hydratation und den Stoffwechsel.</span></span>
+                    Trinken Sie ausreichend <i class="fas fa-glass-water"></i> Wasser über den Tag verteilt.
+                </li>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Sprechen Sie mit Ihrem Arzt, bevor Sie Nahrungsergänzungsmittel einnehmen.</span></span>
+                    Erwägen Sie die Einnahme von <i class="fas fa-capsules"></i> Antioxidantien nach Rücksprache mit einem Arzt.
+                </li>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Präbiotika und Probiotika können die Darmgesundheit fördern.</span></span>
+                    Informieren Sie sich über die Vorteile von <i class="fas fa-microscope"></i> Prä- und Probiotika.
+                </li>
+            </ul>
+        </section>
+
+        <section id="bewegung">
+            <h2><i class="fas fa-dumbbell"></i> Regelmäßige Bewegung</h2>
+            <p>Bewegung ist entscheidend, um den Körper jung und fit zu halten. Hier finden Sie Empfehlungen für verschiedene Trainingsarten.</p>
+            <ul>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">HIIT kann die mitochondriale Funktion verbessern und die Zellalterung verlangsamen.</span></span>
+                    Führen Sie regelmäßig <i class="fas fa-heartbeat"></i> hochintensives Intervalltraining (HIIT) durch.
+                </li>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Ausdauertraining fördert die Herz-Kreislauf-Gesundheit.</span></span>
+                    Planen Sie wöchentlich <i class="fas fa-running"></i> Ausdauertrainingseinheiten ein.
+                </li>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Krafttraining hilft, Muskelmasse und -kraft zu erhalten.</span></span>
+                    Bauen Sie <i class="fas fa-dumbbell"></i> Krafttraining in Ihren Trainingsplan ein.
+                </li>
+            </ul>
+        </section>
+
+        <section id="medikamente">
+            <h2><i class="fas fa-pills"></i> Medikamente & Interventionen</h2>
+            <p>Es gibt verschiedene Medikamente und Interventionen, die den Alterungsprozess beeinflussen können. Hier finden Sie Informationen zu einigen davon.</p>
+            <ul>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Metformin wird zur Behandlung von Diabetes eingesetzt, zeigt aber auch potenzielle Anti-Aging-Effekte.</span></span>
+                    Metformin: Ein Medikament, das ursprünglich zur Behandlung von Diabetes eingesetzt wurde, aber auch lebensverlängernde Eigenschaften haben könnte.
+                </li>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Rapamycin hemmt den mTOR-Signalweg und kann die Lebensspanne verlängern.</span></span>
+                    Rapamycin: Ein Immunsuppressivum, das den TOR-Signalweg hemmt und die Autophagie aktiviert.
+                </li>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Senolytika zielen auf alternde Zellen ab und könnten altersbedingte Krankheiten verzögern.</span></span>
+                    Senolytika: Medikamente, die gezielt seneszente Zellen abtöten.
+                </li>
+            </ul>
+        </section>
+
+        <section id="lebensstil">
+            <h2><i class="fas fa-sun"></i> Lebensstil & weitere Faktoren</h2>
+            <p>Neben Ernährung, Bewegung und Medikamenten gibt es noch weitere Faktoren, die den Alterungsprozess beeinflussen können.</p>
+            <ul>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Stressbewältigungstechniken können helfen, den negativen Auswirkungen von chronischem Stress entgegenzuwirken.</span></span>
+                    Praktizieren Sie <i class="fas fa-spa"></i> Stressmanagement-Techniken wie Meditation oder Yoga.
+                </li>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Ausreichend Schlaf ist wichtig für die Regeneration und Reparatur von Zellen.</span></span>
+                    Achten Sie auf ausreichend und qualitativ hochwertigen <i class="fas fa-bed"></i> Schlaf.
+                </li>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Rauchen ist einer der größten Risikofaktoren für altersbedingte Krankheiten.</span></span>
+                    Vermeiden Sie das <i class="fas fa-smoking-ban"></i> Rauchen und konsumieren Sie Alkohol nur in Maßen.
+                </li>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Soziale Kontakte fördern das psychische Wohlbefinden und können die Lebensqualität im Alter verbessern.</span></span>
+                    Pflegen Sie soziale Kontakte und vermeiden Sie soziale <i class="fas fa-user-friends"></i> Isolation.
+                </li>
+                <li>
+                    <span class="tooltip"><i class="fas fa-info-circle"></i><span class="tooltiptext">Geistige Aktivität hält das Gehirn fit und kann Demenz vorbeugen.</span></span>
+                    Halten Sie Ihr Gehirn aktiv, z.B. durch <i class="fas fa-book"></i> lebenslanges Lernen oder das Spielen von Strategiespielen.
+                </li>
+            </ul>
+        </section>
+
+        <p><strong>Hinweis:</strong> Diese Informationen dienen nur zu Bildungszwecken und ersetzen nicht die Beratung durch einen Arzt. Konsultieren Sie immer einen Arzt, bevor Sie Ihre Ernährung umstellen oder mit einer neuen Behandlung beginnen.</p>
+        
+        <div class="button-container">
+            <a href="https://zaha175.github.io/LEBENSALTER-RECHNER/" target="_blank" class="calculate-button">
+              Lebensalter berechnen (Externer Link)
+            </a>
+        </div>
+
+        <div class="iframe-container">
+            <iframe id="lifeAgeFrame" src="https://zaha175.github.io/LEBENSALTER-RECHNER/" title="Lebensalter-Rechner"></iframe>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 VivaVital. Alle Rechte vorbehalten.</p>
+        <nav>
+            <a href="#ernaehrung">Ernährung</a> | 
+            <a href="#bewegung">Bewegung</a> | 
+            <a href="#medikamente">Medikamente</a> | 
+            <a href="#lebensstil">Lebensstil</a>
+        </nav>
+    </footer>
+    <script>
+        // Bestehender JavaScript-Code für die Navigation und andere Funktionen
+        window.addEventListener('scroll', () => {
+            let sections = document.querySelectorAll('section');
+            let navLinks = document.querySelectorAll('nav ul li a');
+
+            sections.forEach(section => {
+                let top = window.scrollY;
+                let offset = section.offsetTop - 100;
+                let height = section.offsetHeight;
+                let id = section.getAttribute('id');
+
+                if (top >= offset && top < offset + height) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    document.querySelector('nav ul li a[href*=' + id + ']').classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
